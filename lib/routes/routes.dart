@@ -12,4 +12,6 @@ class Routes {
   static const sharedPrefRegistration = '/sharedPrefRegistration';
   static const sharedPrefContent = '/sharedPrefContent';
   static const sharedPrefSaveObject = '/sharedPrefSaveObject';
+
+  static const secureStorage = '/secureStorage';
 }

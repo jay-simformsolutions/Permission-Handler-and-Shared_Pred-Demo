@@ -42,6 +42,14 @@ abstract class _RegistrationStore with Store {
       await sharedPref?.setListOfEmail(emails);
     }
 
+    clearController();
+
     await NavigationService.instance.replaceScreen(const CustomFilePicker());
+  }
+
+  void clearController() {
+    registerEmailController.clear();
+    registerPasswordController.clear();
+    registerUserNameController.clear();
   }
 }

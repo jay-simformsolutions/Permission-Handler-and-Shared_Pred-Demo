@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler_demo/routes/navigator_service.dart';
 import 'package:permission_handler_demo/routes/routes.dart';
+import 'package:permission_handler_demo/secure_storage/secure_storage.dart';
 import 'package:permission_handler_demo/shared_preference/shared_pref.dart';
 import 'package:permission_handler_demo/store/open_app_setting_store.dart';
 import 'package:provider/provider.dart';
@@ -69,8 +70,16 @@ class OpenAppSettingOnDialog extends StatelessWidget {
               child: const Text('Save Object'),
             ),
             ElevatedButton(
-              onPressed: SharedPref.instance?.clearSharedPref,
-              child: const Text('Clear Shared_pref'),
+              onPressed: () => NavigationService.instance
+                  .navigateToScreen(Routes.secureStorage),
+              child: const Text('Secure Storage Demo'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                SharedPref.instance?.clearSharedPref();
+                SecureStorage.instance?.secureStorage.deleteAll();
+              },
+              child: const Text('Clear Shared_pref and Secure Storage'),
             ),
           ],
         ),
