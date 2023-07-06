@@ -1,0 +1,1 @@
+enum FilePickerState { picking, picked }
