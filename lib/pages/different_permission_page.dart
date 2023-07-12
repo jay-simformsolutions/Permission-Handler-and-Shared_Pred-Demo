@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler_demo/store/all_permission_store.dart';
+import 'package:permission_handler_demo/store/permission_handler_store/all_permission_store.dart';
 import 'package:provider/provider.dart';
 
 class DifferentPermission extends StatelessWidget {

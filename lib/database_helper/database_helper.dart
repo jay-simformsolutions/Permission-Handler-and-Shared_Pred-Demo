@@ -13,27 +13,14 @@ class DataBaseHelper {
   static const databaseName = 'my_database.db';
   static int databaseVersion = 1;
 
-  static const initScript =
-      []; // Initialization script split into seperate statements
   static Map<int, String> migrationScripts = {
     1: '''
-CREATE TABLE items(
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        title TEXT,
-        description TEXT,
-        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-      )''',
-    2: '''
-      CREATE TABLE department(
-      id INTEGER FOREIGN KEY AUTOINCREMENT NOT NULL,
-      departmentName TEXT,
-      FOREIGN KEY (id) REFERENCES items(id)
-      )''',
-    3: 'SELECT items.id, items.title, items.description, department.department'
-        ' FROM items INNER JOIN department ON items.id == department.id,'
-
-    // 2: 'ALTER TABLE items ADD department STRING',
-    // 3: 'ALTER TABLE items ADD email_id STRING',
+    CREATE TABLE items(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    title TEXT,
+    description TEXT,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      )'''
   };
 
   // this opens the database (and creates it if it doesn't exist)
@@ -42,13 +29,10 @@ CREATE TABLE items(
     final path = join(documentsDirectory.path, databaseName);
     debugPrint('Version name is $databaseVersion');
     // debugPrint('Path is $path');
-    instance.database = await openDatabase(
+    database = await openDatabase(
       path,
       version: migrationScripts.length,
       onCreate: createTables,
-      onDowngrade: (db, oldVersion, newVersion) async {
-        print('old version $oldVersion and new version $newVersion');
-      },
       onUpgrade: (db, oldVersion, newVersion) async {
         debugPrint('Inside onUpgrade');
         for (var i = oldVersion + 1; i <= newVersion; i++) {
@@ -56,10 +40,6 @@ CREATE TABLE items(
           await db.execute(migrationScripts[i]!);
         }
       },
-      onOpen: (db) {
-        debugPrint('Data base is open');
-      },
-      singleInstance: false,
     );
   }
 
@@ -76,7 +56,7 @@ CREATE TABLE items(
   Future<void> createTables(Database database, int id) async {
     debugPrint('Inside create tables function');
     debugPrint('Version name is $databaseVersion');
-    for (var i = 1; i < migrationScripts.length; i++) {
+    for (var i = 1; i <= migrationScripts.length; i++) {
       debugPrint('Executed $i');
       await database.execute(migrationScripts[i]!);
     }
@@ -115,14 +95,14 @@ CREATE TABLE items(
   Future<List<Map<String, dynamic>>> getItems() async {
     //debugPrint('Version name is $databaseVersion');
     final db = instance.database;
-    return db.query('items', orderBy: 'id');
+    return db.query('items');
   }
 
   /// Read a single item by id
   Future<List<Map<String, dynamic>>> getItem(int id) async {
     debugPrint('Version name is $databaseVersion');
     final db = instance.database;
-    return db.query('items', where: 'id = ?', whereArgs: [id], limit: 1);
+    return db.query('items', where: 'id = ?', whereArgs: [id]);
   }
 
   /// Update an item by id

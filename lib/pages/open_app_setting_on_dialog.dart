@@ -75,6 +75,16 @@ class OpenAppSettingOnDialog extends StatelessWidget {
               child: const Text('Secure Storage Demo'),
             ),
             ElevatedButton(
+              onPressed: () => NavigationService.instance
+                  .navigateToScreen(Routes.sqfLitePage),
+              child: const Text('Sqf_Lite Demo'),
+            ),
+            ElevatedButton(
+              onPressed: () =>
+                  NavigationService.instance.navigateToScreen(Routes.driftPage),
+              child: const Text('Drift Demo'),
+            ),
+            ElevatedButton(
               onPressed: () {
                 SharedPref.instance?.clearSharedPref();
                 SecureStorage.instance?.secureStorage.deleteAll();

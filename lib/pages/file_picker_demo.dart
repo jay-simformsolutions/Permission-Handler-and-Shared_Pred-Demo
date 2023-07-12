@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:permission_handler_demo/store/file_picker_store.dart';
+import 'package:permission_handler_demo/store/file_picker_store/file_picker_store.dart';
 import 'package:provider/provider.dart';
 
 class FilePickerDemo extends StatelessWidget {

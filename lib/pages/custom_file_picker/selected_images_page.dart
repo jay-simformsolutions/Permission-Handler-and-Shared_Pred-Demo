@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler_demo/store/custom_file_picker_store.dart';
+import 'package:permission_handler_demo/store/custome_file_picker_store/custom_file_picker_store.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
 

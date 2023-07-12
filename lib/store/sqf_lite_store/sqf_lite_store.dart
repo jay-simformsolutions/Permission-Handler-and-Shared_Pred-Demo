@@ -24,8 +24,12 @@ abstract class _SqfLiteStore with Store {
   // This function is used to fetch all data from the database
   Future<void> refreshUserData() async {
     userData.clear();
-    final data = await DataBaseHelper.instance.getItems();
-    userData.addAll(data);
+    print('refresh data');
+    // final data = await DataBaseHelper.instance.getItems();
+    // userData.addAll(data);
+    final result =
+        await DataBaseHelper.instance.database.rawQuery('select  * from items');
+    print(result);
     isLoading = false;
   }
 

@@ -7,20 +7,24 @@ import 'package:permission_handler_demo/pages/custom_file_picker/custom_file_pic
 import 'package:permission_handler_demo/pages/custom_file_picker/preview_page.dart';
 import 'package:permission_handler_demo/pages/custom_file_picker/selected_images_page.dart';
 import 'package:permission_handler_demo/pages/different_permission_page.dart';
+import 'package:permission_handler_demo/pages/drift_database/drift_database.dart';
 import 'package:permission_handler_demo/pages/file_picker_demo.dart';
 import 'package:permission_handler_demo/pages/open_app_setting_on_dialog.dart';
 import 'package:permission_handler_demo/pages/secure_storage/secure_storage.dart';
 import 'package:permission_handler_demo/pages/shared_pref_demo/login_page.dart';
 import 'package:permission_handler_demo/pages/shared_pref_demo/registration.dart';
 import 'package:permission_handler_demo/pages/shared_pref_demo/save_object.dart';
+import 'package:permission_handler_demo/pages/sqf_lite_demo/sqf_lite_page.dart';
 import 'package:permission_handler_demo/routes/routes.dart';
-import 'package:permission_handler_demo/store/all_permission_store.dart';
-import 'package:permission_handler_demo/store/file_picker_store.dart';
+import 'package:permission_handler_demo/store/drift_store/drift_database_store.dart';
+import 'package:permission_handler_demo/store/file_picker_store/file_picker_store.dart';
 import 'package:permission_handler_demo/store/open_app_setting_store.dart';
+import 'package:permission_handler_demo/store/permission_handler_store/all_permission_store.dart';
 import 'package:permission_handler_demo/store/secure_storage_store/secure_storage_store.dart';
 import 'package:permission_handler_demo/store/shared_pref_store/login_store.dart';
 import 'package:permission_handler_demo/store/shared_pref_store/save_object_store.dart';
 import 'package:permission_handler_demo/store/shared_pref_store/shared_pref_content.dart';
+import 'package:permission_handler_demo/store/sqf_lite_store/sqf_lite_store.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class RouteGenerator {
@@ -85,6 +89,15 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) =>
               const SecureStoragePage().withProvider(SecureStorageStore()),
+        );
+      case Routes.driftPage:
+        return MaterialPageRoute(
+          builder: (_) =>
+              const DriftDatabasePage().withProvider(DriftDatabaseStore()),
+        );
+      case Routes.sqfLitePage:
+        return MaterialPageRoute(
+          builder: (_) => const SqfLitePage().withProvider(SqfLiteStore()),
         );
       default:
         return errorRoute();

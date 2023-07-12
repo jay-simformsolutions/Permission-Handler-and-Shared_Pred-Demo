@@ -7,6 +7,12 @@ part 'secure_storage_store.g.dart';
 class SecureStorageStore = _SecureStorageStore with _$SecureStorageStore;
 
 abstract class _SecureStorageStore with Store {
+  _SecureStorageStore() {
+    secureStorage?.readUserName().then(
+          (value) => debugPrint('Value is $value'),
+        );
+  }
+
   TextEditingController userNameCnt = TextEditingController();
   TextEditingController passwordCnt = TextEditingController();
 

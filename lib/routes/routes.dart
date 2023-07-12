@@ -14,4 +14,6 @@ class Routes {
   static const sharedPrefSaveObject = '/sharedPrefSaveObject';
 
   static const secureStorage = '/secureStorage';
+  static const sqfLitePage = '/sqfLitePage';
+  static const driftPage = '/driftPage';
 }
