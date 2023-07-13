@@ -16,4 +16,5 @@ class Routes {
   static const secureStorage = '/secureStorage';
   static const sqfLitePage = '/sqfLitePage';
   static const driftPage = '/driftPage';
+  static const mongodbPage = '/mongodbPage';
 }

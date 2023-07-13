@@ -33,16 +33,8 @@ class DriftDatabasePage extends StatelessWidget {
                           title: Text(
                             store.tasks[index].name,
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                store.tasks[index].task,
-                              ),
-                              Text(
-                                store.tasks[index].departmentId.toString(),
-                              ),
-                            ],
+                          subtitle: Text(
+                            store.tasks[index].task,
                           ),
                           trailing: SizedBox(
                             width: 100,

@@ -85,6 +85,11 @@ class OpenAppSettingOnDialog extends StatelessWidget {
               child: const Text('Drift Demo'),
             ),
             ElevatedButton(
+              onPressed: () => NavigationService.instance
+                  .navigateToScreen(Routes.mongodbPage),
+              child: const Text('Mongo Db Demo'),
+            ),
+            ElevatedButton(
               onPressed: () {
                 SharedPref.instance?.clearSharedPref();
                 SecureStorage.instance?.secureStorage.deleteAll();

@@ -53,6 +53,9 @@ dependencies:
   drift: ^2.8.0
   sqlite3_flutter_libs: ^0.5.15
   drift_db_viewer: ^2.0.0
+  mongo_dart: ^0.9.1
+  json_annotation: ^4.8.1
+  json_serializable: ^6.6.2
 
 
 dev_dependencies:

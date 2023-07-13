@@ -9,6 +9,7 @@ import 'package:permission_handler_demo/pages/custom_file_picker/selected_images
 import 'package:permission_handler_demo/pages/different_permission_page.dart';
 import 'package:permission_handler_demo/pages/drift_database/drift_database.dart';
 import 'package:permission_handler_demo/pages/file_picker_demo.dart';
+import 'package:permission_handler_demo/pages/mongo_db_database/mongo_db_database_page.dart';
 import 'package:permission_handler_demo/pages/open_app_setting_on_dialog.dart';
 import 'package:permission_handler_demo/pages/secure_storage/secure_storage.dart';
 import 'package:permission_handler_demo/pages/shared_pref_demo/login_page.dart';
@@ -98,6 +99,11 @@ class RouteGenerator {
       case Routes.sqfLitePage:
         return MaterialPageRoute(
           builder: (_) => const SqfLitePage().withProvider(SqfLiteStore()),
+        );
+      case Routes.mongodbPage:
+        return MaterialPageRoute(
+          builder: (_) =>
+              const MongodbDatabasePage().withProvider(SqfLiteStore()),
         );
       default:
         return errorRoute();

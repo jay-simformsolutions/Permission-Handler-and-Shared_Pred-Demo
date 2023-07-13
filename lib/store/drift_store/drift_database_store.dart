@@ -194,7 +194,7 @@ abstract class _DriftDatabaseStore with Store {
 
     final joinQuery = await drift
         .customSelect(
-            'select Task.name As Emp_Name, Department.department_id AS departmentName FROM Task JOIN Department ON Task.department_id=Department.department_id')
+            'select Task.name As Emp_Name, Department.department_name AS departmentName FROM Task JOIN Department ON Task.department_id=Department.department_id')
         .get();
     print('Join Query is ${joinQuery.first.data}');
 
