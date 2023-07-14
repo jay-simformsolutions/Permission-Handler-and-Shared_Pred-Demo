@@ -90,6 +90,11 @@ class OpenAppSettingOnDialog extends StatelessWidget {
               child: const Text('Mongo Db Demo'),
             ),
             ElevatedButton(
+              onPressed: () => NavigationService.instance
+                  .navigateToScreen(Routes.firebasePage),
+              child: const Text('Firebase Example'),
+            ),
+            ElevatedButton(
               onPressed: () {
                 SharedPref.instance?.clearSharedPref();
                 SecureStorage.instance?.secureStorage.deleteAll();

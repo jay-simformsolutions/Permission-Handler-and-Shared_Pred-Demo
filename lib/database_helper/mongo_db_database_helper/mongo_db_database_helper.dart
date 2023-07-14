@@ -14,9 +14,6 @@ class MongodbDatabaseHelper {
   static Db? database;
   static DbCollection? userCollection;
 
-  final MONGO_CONN_URL =
-      'mongodb+srv://sage:716giCKIZg3FoVji@mongodbcluster.ml6rrnt.mongodb.net/User?retryWrites=true&w=majority';
-
   final USER_COLLECTION = 'users';
 
   final connectString =
@@ -26,11 +23,12 @@ class MongodbDatabaseHelper {
   Future<void> connectToMongo() async {
     print('connect to mongo');
     try {
-      print('connect to mongo 3 ${Db(connectString)}');
+      print('connect to mongo 3 ${debugDescribeFocusTree()}');
 
-      database = await Db.create(connectString);
-      await database?.open();
-      debugPrint('Data base is Conneced');
+      database = await Db.create(connectString, debugDescribeFocusTree());
+
+      await database?.open(secure: true, tlsAllowInvalidCertificates: true);
+      debugPrint('Data base is Connected');
       inspect(database);
       userCollection = database?.collection(USER_COLLECTION);
     } catch (e) {
@@ -46,21 +44,24 @@ class MongodbDatabaseHelper {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
-  Future<dynamic> insert(UserModel user) async {
-    await userCollection?.insertAll([user.toMap()]);
+  Future<void> insert(UserModel user) async {
+    print('insert');
+
+    await userCollection?.insert(user.toMap());
   }
 
-  Future<dynamic> update(UserModel user) async {
-    var u = await userCollection?.findOne({'_id': user.id});
-    u?['name'] = user.name;
-    u?['age'] = user.age;
-    u?['phone'] = user.phone;
-    await userCollection?.replaceOne(userCollection, user.toMap());
+  Future<void> update(UserModel user) async {
+    final u = await userCollection?.findOne({'_id': user.id});
+
+    debugPrint('After update name is ${user.name}');
+    final result = await userCollection?.update(u, user.toMap());
+    print(result);
   }
 
-  Future<dynamic> delete(UserModel user) async {
+  Future<void> delete(UserModel user) async {
     await userCollection?.remove(where.id(user.id));
   }
 }
