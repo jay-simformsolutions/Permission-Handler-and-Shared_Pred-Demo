@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:permission_handler_demo/extensions/provider_extension.dart';
+import 'package:permission_handler_demo/pages/firebase/screens/phone_authentication.dart';
 import 'package:permission_handler_demo/pages/firebase/screens/profiles.dart';
 import 'package:permission_handler_demo/pages/firebase/screens/sign_up.dart';
 import 'package:permission_handler_demo/pages/firebase/utils/firebase_auth.dart';
 import 'package:permission_handler_demo/pages/firebase/utils/validator.dart';
+import 'package:permission_handler_demo/store/firebase_store/firebase_phone_authentication_store.dart';
 import 'package:permission_handler_demo/store/firebase_store/firebase_sign_in_store.dart';
 import 'package:permission_handler_demo/store/firebase_store/firebase_sign_up_store.dart';
 import 'package:provider/provider.dart';
@@ -75,19 +77,38 @@ class SignInPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final user = await FirebaseAuthClass.signInWithGoogle();
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute<Widget>(
+                                builder: (context) =>
+                                    const PhoneAuthentication().withProvider(
+                                  MobileNumberAuthStore(),
+                                ),
+                              ),
+                            );
+                          },
+                          child: const Text('Sign In With Mobile Number'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            final user =
+                                await FirebaseAuthClass.signInWithGoogle();
 
-                        if (user != null) {
-                          await Navigator.of(context).pushReplacement(
-                            MaterialPageRoute<Widget>(
-                              builder: (context) => const ProfilesPage(),
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text('Sign In With Google'),
+                            if (user != null) {
+                              await Navigator.of(context).pushReplacement(
+                                MaterialPageRoute<Widget>(
+                                  builder: (context) => const ProfilesPage(),
+                                ),
+                              );
+                            }
+                          },
+                          child: const Text('Sign In With Google'),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 24),
                     Observer(

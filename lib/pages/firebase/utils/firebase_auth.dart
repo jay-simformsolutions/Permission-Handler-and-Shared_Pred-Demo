@@ -92,4 +92,22 @@ class FirebaseAuthClass {
 
     return user;
   }
+
+  static Future<void> signInWithPhoneNumber(
+      String phoneNumber, BuildContext context) async {
+    final auth = FirebaseAuth.instance;
+
+    await auth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (phoneAuthCredential) {
+        debugPrint('Verification is Success');
+      },
+      verificationFailed: (error) {
+        debugPrint('Error is $error');
+      },
+      timeout: const Duration(seconds: 60),
+      codeSent: (String verificationId, int? forceResendingToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
 }
