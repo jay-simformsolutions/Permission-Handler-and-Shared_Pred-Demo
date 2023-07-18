@@ -60,6 +60,7 @@ dependencies:
   firebase_auth: ^4.6.3
   google_sign_in: ^6.1.4
   pinput: ^2.2.12
+  cloud_firestore: ^4.8.3
 
 
 dev_dependencies:
